@@ -20,12 +20,24 @@
       position: relative;
       overflow: hidden;
     }
+
+    #map-wrapper {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
   </style>
 </head>
 
 <body>
-  <div id="map"></div>
-  <script>
+  <div id="map">
+    <div id="map-wrapper">
+    </div>
+  </div>
+
+  <script type="module">
+    import interact from 'https://cdn.interactjs.io/v1.10.11/interactjs/index.js'
+
     const randomColor = () => Math.floor(Math.random() * 16777215).toString(16)
     const createDiv = (x, y) => {
       const $div = document.createElement('div')
@@ -35,21 +47,28 @@
       $div.style.height = '256px'
       $div.style.left = `${x}px`
       $div.style.top = `${y}px`
-      document.getElementById('map').appendChild($div)
+      document.getElementById('map-wrapper').appendChild($div)
       return $div
     }
+    // const moveAll = (x, y) => {
+    //   for (let j = 0; j < tilesY; j++) {
+    //     for (let i = 0; i < tilesX; i++) {
+    //       let newX = parseFloat(tiles[j][i].style.left.slice(0, -2)) - x
+    //       let newY = parseFloat(tiles[j][i].style.top.slice(0, -2)) - y
+    //       tiles[j][i].style.left = newX.toString() + 'px'
+    //       tiles[j][i].style.top = newY.toString() + 'px'
+    //     }
+    //   }
+    // }
     const moveAll = (x, y) => {
-      for (let j = 0; j < tilesY; j++) {
-        for (let i = 0; i < tilesX; i++) {
-          let newX = parseFloat(tiles[j][i].style.left.slice(0, -2)) - x
-          let newY = parseFloat(tiles[j][i].style.top.slice(0, -2)) - y
-          tiles[j][i].style.left = newX.toString() + 'px'
-          tiles[j][i].style.top = newY.toString() + 'px'
-        }
-      }
+      let newX = parseFloat(wrapper.style.left.slice(0, -2)) - x
+      let newY = parseFloat(wrapper.style.top.slice(0, -2)) - y
+      wrapper.style.left = newX.toString() + 'px'
+      wrapper.style.top = newY.toString() + 'px'
     }
 
     const map = document.getElementById('map')
+    const wrapper = document.getElementById('map-wrapper')
     const width = map.offsetWidth
     const height = map.offsetHeight
 
@@ -86,37 +105,22 @@
     moveAll(deltaX, deltaY)
 
 
-    let active = false
-    let initialX
-    let initialY
-    let offsetX = 0
-    let offsetY = 0
-    let currentX
-    let currentY
-    const dragStart = (e) => {
-      initialX = e.clientX - offsetX
-      initialY = e.clientY - offsetY
-      active = true
+    const dragMove = (e) => {
+      const target = e.target
+      const x = (parseFloat(target.getAttribute('data-x')) || 0) + e.dx
+      const y = (parseFloat(target.getAttribute('data-y')) || 0) + e.dy
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+      target.setAttribute('data-x', x)
+      target.setAttribute('data-y', y)
     }
-    const dragEnd = (e) => {
-      initialX = e.clientX - offsetX
-      initialY = e.clientY - offsetY
-      active = false
-    }
-    const drag = (e) => {
-      if (active) {
-        console.log('drag')
-        e.preventDefault()
-        currentX = e.clientX - initialX
-        currentY = e.clientY - initialY
-        offsetX = currentX
-        offsetY = currentY
-        moveAll(-0.02 * currentX, -0.02 * currentY)
-      }
-    }
-    document.addEventListener('mouseup', dragEnd, false)
-    document.addEventListener('mousedown', dragStart, false)
-    document.addEventListener('mousemove', drag, false)
+    interact('#map-wrapper')
+      .draggable({
+        inertia: true,
+        auutoScroll: true,
+        listeners: {
+          move: dragMove
+        }
+      })
   </script>
 </body>
 
