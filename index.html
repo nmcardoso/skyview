@@ -106,17 +106,17 @@
 
 
     const dragMove = (e) => {
-      const target = e.target
+      const target = document.getElementById('map-wrapper')
       const x = (parseFloat(target.getAttribute('data-x')) || 0) + e.dx
       const y = (parseFloat(target.getAttribute('data-y')) || 0) + e.dy
       target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
       target.setAttribute('data-x', x)
       target.setAttribute('data-y', y)
     }
-    interact('#map-wrapper')
+    interact('#map')
       .draggable({
         inertia: true,
-        auutoScroll: true,
+        auutoScroll: false,
         listeners: {
           move: dragMove
         }
