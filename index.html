@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyView</title>
+  <style>
+    *,
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    const randomColor = () => Math.floor(Math.random() * 16777215).toString(16)
+    const createDiv = (x, y) => {
+      const $div = document.createElement('div')
+      $div.style.backgroundColor = `#${randomColor()}`
+      $div.style.position = 'absolute'
+      $div.style.width = '256px'
+      $div.style.height = '256px'
+      $div.style.left = `${x}px`
+      $div.style.top = `${y}px`
+      document.getElementById('map').appendChild($div)
+      return $div
+    }
+    const moveAll = (x, y) => {
+      for (let j = 0; j < tilesY; j++) {
+        for (let i = 0; i < tilesX; i++) {
+          let newX = parseFloat(tiles[j][i].style.left.slice(0, -2)) - x
+          let newY = parseFloat(tiles[j][i].style.top.slice(0, -2)) - y
+          tiles[j][i].style.left = newX.toString() + 'px'
+          tiles[j][i].style.top = newY.toString() + 'px'
+        }
+      }
+    }
+
+    const map = document.getElementById('map')
+    const width = map.offsetWidth
+    const height = map.offsetHeight
+
+    console.log(width, height)
+
+    let tilesX = Math.ceil(width / 256)
+    let tilesY = Math.ceil(height / 256)
+
+    if (tilesX % 2 === 0) tilesX++
+    if (tilesY % 2 === 0) tilesY++
+
+    console.log(tilesX, tilesY)
+
+
+    // createDiv(width / 2 - 128, height / 2 - 128)
+
+    const tiles = []
+
+    for (let j = 0; j < tilesY; j++) {
+      tiles[j] = []
+      for (let i = 0; i < tilesX; i++) {
+        // createDiv((tilesY / 2 - i) * 256 - 128, (tilesX / 2 - j) * 256 - 128)
+        const div = createDiv(256 * i, 256 * j)
+        tiles[j][i] = div
+      }
+    }
+
+    const centralX = tiles[Math.ceil(tilesY / 2)][Math.ceil(tilesX / 2)].getBoundingClientRect().left
+    const centralY = tiles[Math.ceil(tilesY / 2)][Math.ceil(tilesX / 2)].getBoundingClientRect().top
+
+    const deltaX = centralX - 128 - (width / 2)
+    const deltaY = centralY - 128 - (height / 2)
+
+    moveAll(deltaX, deltaY)
+
+
+    let active = false
+    let initialX
+    let initialY
+    let offsetX = 0
+    let offsetY = 0
+    let currentX
+    let currentY
+    const dragStart = (e) => {
+      initialX = e.clientX - offsetX
+      initialY = e.clientY - offsetY
+      active = true
+    }
+    const dragEnd = (e) => {
+      initialX = e.clientX - offsetX
+      initialY = e.clientY - offsetY
+      active = false
+    }
+    const drag = (e) => {
+      if (active) {
+        console.log('drag')
+        e.preventDefault()
+        currentX = e.clientX - initialX
+        currentY = e.clientY - initialY
+        offsetX = currentX
+        offsetY = currentY
+        moveAll(-0.02 * currentX, -0.02 * currentY)
+      }
+    }
+    document.addEventListener('mouseup', dragEnd, false)
+    document.addEventListener('mousedown', dragStart, false)
+    document.addEventListener('mousemove', drag, false)
+  </script>
+</body>
+
+</html>
