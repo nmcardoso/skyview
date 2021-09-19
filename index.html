@@ -50,16 +50,6 @@
       document.getElementById('map-wrapper').appendChild($div)
       return $div
     }
-    // const moveAll = (x, y) => {
-    //   for (let j = 0; j < tilesY; j++) {
-    //     for (let i = 0; i < tilesX; i++) {
-    //       let newX = parseFloat(tiles[j][i].style.left.slice(0, -2)) - x
-    //       let newY = parseFloat(tiles[j][i].style.top.slice(0, -2)) - y
-    //       tiles[j][i].style.left = newX.toString() + 'px'
-    //       tiles[j][i].style.top = newY.toString() + 'px'
-    //     }
-    //   }
-    // }
     const moveAll = (x, y) => {
       let newX = parseFloat(wrapper.style.left.slice(0, -2)) - x
       let newY = parseFloat(wrapper.style.top.slice(0, -2)) - y
@@ -82,28 +72,28 @@
 
     console.log(tilesX, tilesY)
 
-
-    // createDiv(width / 2 - 128, height / 2 - 128)
-
     const tiles = []
-
     for (let j = 0; j < tilesY; j++) {
       tiles[j] = []
       for (let i = 0; i < tilesX; i++) {
-        // createDiv((tilesY / 2 - i) * 256 - 128, (tilesX / 2 - j) * 256 - 128)
         const div = createDiv(256 * i, 256 * j)
         tiles[j][i] = div
       }
     }
 
+
     const centralX = tiles[Math.ceil(tilesY / 2)][Math.ceil(tilesX / 2)].getBoundingClientRect().left
     const centralY = tiles[Math.ceil(tilesY / 2)][Math.ceil(tilesX / 2)].getBoundingClientRect().top
-
     const deltaX = centralX - 128 - (width / 2)
     const deltaY = centralY - 128 - (height / 2)
+    console.log(deltaX, deltaY)
+    wrapper.style.transform = 'translate(' + (-1 * deltaX) + 'px, ' + (-1 * deltaY) + 'px)'
 
-    moveAll(deltaX, deltaY)
 
+    const refBoxX = Math.ceil(tilesX / 2)
+    const refBoxY = Math.ceil(tilesY / 2)
+    let offsetX = 0
+    let offsetY = 0
 
     const dragMove = (e) => {
       const target = document.getElementById('map-wrapper')
@@ -113,12 +103,37 @@
       target.setAttribute('data-x', x)
       target.setAttribute('data-y', y)
     }
+    const dragEnd = (e) => {
+      const dx = e.x0 - e.pageX
+      const dy = e.y0 - e.pageY
+      offsetX += dx
+      offsetY += dy
+
+      const newTilesX = Math.ceil(dx / 256)
+      const newTilesY = Math.ceil(dy / 256)
+
+      console.log('dx', dx)
+      const baseX = tiles[0].length
+
+      if (dx > 0) {
+        for (let j = 0; j < tilesY; j++) {
+          const baseY = tiles.length
+          tiles[baseY + j] = []
+
+          for (let i = 0; i < newTilesX; i++) {
+            console.log(j, baseX + i)
+            tiles[j][baseX + i] = createDiv(256 * (baseX + i), 256 * j)
+          }
+        }
+      }
+    }
     interact('#map')
       .draggable({
         inertia: true,
         auutoScroll: false,
         listeners: {
-          move: dragMove
+          move: dragMove,
+          end: dragEnd
         }
       })
   </script>
