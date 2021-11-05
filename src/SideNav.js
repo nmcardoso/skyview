@@ -25,9 +25,24 @@ class SideNav {
     }, false)
   }
 
+  _clean() {
+    document.getElementById('splus-spectra').src = ``
+    document.getElementById('splus-trilogy').src = ``
+  }
+
   _render() {
-    document.getElementById('splus-spectra').src = `https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&all`
-    document.getElementById('splus-trilogy').src = `https://checker-melted-forsythia.glitch.me/img?ra=${this.ra}&dec=${this.dec}`
+    var spectra = document.getElementById('splus-spectra')
+    spectra.src = `https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&all`
+
+    spectra.onerror = function(e) {
+        //Remember to handle this
+        alert('s-spectra not available')
+    };
+
+    var image = document.getElementById('splus-trilogy')
+    image.src = `https://checker-melted-forsythia.glitch.me/img?ra=${this.ra}&dec=${this.dec}`
+
+    var image = $("<img src='http://no-image.com/' />");
   }
 }
 

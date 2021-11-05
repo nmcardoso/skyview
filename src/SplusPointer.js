@@ -41,6 +41,7 @@ class SplusPointer {
         const [ra, dec] = aladin.A.pix2world(e.clientX, e.clientY)
 
         const sn = new SideNav()
+        sn._clean()
         sn.updateCoord(ra, dec)
         sn.openNav()
       }
