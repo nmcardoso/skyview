@@ -6,6 +6,12 @@ function closeNav() {
   document.getElementById('object-details').style.width = '0px'
 }
 
+function createElementFromHTML(html) {
+  const div = document.createElement('div')
+  div.innerHTML = html.trim()
+  return div.firstChild
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const hipsUrl = 'https://splus.cloud/HIPS/dr2/color'
 
@@ -20,13 +26,25 @@ window.addEventListener('DOMContentLoaded', () => {
     showLayersControl: false,
     showGotoControl: true,
     showShareControl: true,
-    showSimbadPointerControl: true,
+    showSimbadPointerControl: false,
     showFrame: true,
     reticleColor: 'rgb(178, 50, 178)',
     reticleSize: 22
   })
   const splusSurvey = aladin.createImageSurvey('S-PLUS', 'S-PLUS', hipsUrl, 'equatorial', 10, { imgFormat: 'png' })
   aladin.setImageSurvey(splusSurvey)
+
+  // Splus Pointer
+  let html = `
+    <div class="splusPointerControl-container">
+      <div class="splusPointerControl"></div>
+    </div>
+  `
+  const splusPointerControl = createElementFromHTML(html)
+  const container = document.getElementById('aladin-lite-div')
+  const gotoControl = container.querySelector('.aladin-gotoControl-container')
+
+  gotoControl.insertAdjacentElement('afterend', splusPointerControl)
 
 
   document.getElementById('aladin-lite-div').addEventListener('click', e => {
