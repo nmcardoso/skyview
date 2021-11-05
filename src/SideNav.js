@@ -26,7 +26,7 @@ class SideNav {
   }
 
   _render() {
-    document.getElementById('splus-spectra').src = `https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&iso&aper6`
+    document.getElementById('splus-spectra').src = `https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&all`
     document.getElementById('splus-trilogy').src = `https://checker-melted-forsythia.glitch.me/img?ra=${this.ra}&dec=${this.dec}`
   }
 }
