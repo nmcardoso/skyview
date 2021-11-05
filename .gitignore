@@ -1,5 +1,8 @@
 # NodeJS
 node_modules
 
+# Webpack
+dist
+
 # MAC
 .DS_Store
