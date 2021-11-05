@@ -11,6 +11,13 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   mode: process.env.NODE_ENV || 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    allowedHosts: 'all',
+    host: '0.0.0.0',
+    port: 8080
+  },
   module: {
     rules: [
       {
