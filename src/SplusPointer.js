@@ -4,6 +4,10 @@ import SideNav from './SideNav'
 
 class SplusPointer {
   constructor() {
+    this.selectionMode = false
+  }
+
+  setup() {
     this._setupElements()
     this._setupListeners()
   }
@@ -19,16 +23,27 @@ class SplusPointer {
     const gotoControl = container.querySelector('.aladin-gotoControl-container')
 
     gotoControl.insertAdjacentElement('afterend', splusPointerControl)
+
+    splusPointerControl.addEventListener('click', (e) => {
+      e.stopPropagation()
+      this.selectionMode = true
+      document.querySelector('canvas.aladin-reticleCanvas').classList.add('splusPointer-cursor')
+    })
   }
 
   _setupListeners() {
     const aladin = new AladinSingleton()
     document.getElementById('aladin-lite-div').addEventListener('click', e => {
-      const [ra, dec] = aladin.A.pix2world(e.clientX, e.clientY)
+      if (this.selectionMode) {
+        this.selectionMode = false
+        document.querySelector('canvas.aladin-reticleCanvas').classList.remove('splusPointer-cursor')
 
-      const sn = new SideNav()
-      sn.updateCoord(ra, dec)
-      sn.openNav()
+        const [ra, dec] = aladin.A.pix2world(e.clientX, e.clientY)
+
+        const sn = new SideNav()
+        sn.updateCoord(ra, dec)
+        sn.openNav()
+      }
     })
   }
 }

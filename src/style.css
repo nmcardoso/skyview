@@ -34,7 +34,7 @@
 
 .splusPointer-cursor {
   cursor: auto;
-  cursor: url('../assets/pointer_blue.png') 15 15, auto;
+  cursor: url('../assets/pointer_blue.png') 15 15, auto !important;
 }
 
 /* Sidebar */

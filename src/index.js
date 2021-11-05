@@ -8,4 +8,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // aladin.A.setImageSurvey(splusSurvey)
 
   const sp = new SplusPointer()
+  sp.setup()
 })
