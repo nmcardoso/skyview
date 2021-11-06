@@ -1,11 +1,15 @@
 import './SideNav.css'
-import ImageContainer from './ImageContainer'
+import TabController from './TabController'
 
 class SideNav {
   constructor() {
     this.ra = null
     this.dec = null
-    this._afterMount()
+    // Controllers
+    this.tabController = new TabController({
+      selectorElement: document.getElementById('nav-tab-selector'),
+      contentElement: document.getElementById('nav-tab-content')
+    })
   }
 
   openNav() {
