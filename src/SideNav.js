@@ -1,6 +1,19 @@
 import './SideNav.css'
 import ImageController from './ImageController'
 import TabController from './TabController'
+import SloanService from './SloanService'
+
+const sdssSpecFactory = (ra, dec) => {
+  return async () => {
+    const sloanService = new SloanService()
+    const id = await sloanService.getSpecId({ ra, dec })
+    if (id) {
+      return `https://skyserver.sdss.org/dr16/en/get/SpecById.ashx?id=${id}`
+    } else {
+      throw new Error('undefined specId')
+    }
+  }
+}
 
 class SideNav {
   constructor() {
@@ -60,6 +73,8 @@ class SideNav {
     this.legacyRGBController.updateImageSrc(
       `https://www.legacysurvey.org/viewer/cutout.jpg?ra=${this.ra}&dec=${this.dec}&layer=dr8&pixscale=0.55`
     )
+
+    this.sdssSpectraController.updateImageSrcAsync(sdssSpecFactory(this.ra, this.dec))
   }
 }
 
