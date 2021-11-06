@@ -14,7 +14,7 @@ class AladinSingleton {
       target: '11.4498 -0.8528',
       fov: 0.14,
       cooFrame: 'ICRSd',
-      fullScreen: true,
+      fullScreen: false,
       showReticle: true,
       showZoomControl: false,
       showFullscreenControl: false,

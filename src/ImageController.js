@@ -1,13 +1,15 @@
 import './ImageController.css'
 
 class ImageController {
-  constructor({ containerElement, enableZoom = true }) {
-    this.enableZoom = enableZoom
+  constructor({ containerElement }) {
     this.containerElement = containerElement
 
     this.loadingElement = containerElement.querySelector('[data-loading]')
     this.errorElement = containerElement.querySelector('[data-error]')
     this.imageElement = containerElement.querySelector('img')
+
+    const modalQuery = this.imageElement.dataset.bsTarget
+    this.modalElement = modalQuery ? document.querySelector(modalQuery) : null
 
     this._setupListeners()
   }
@@ -17,6 +19,10 @@ class ImageController {
     this.loadingElement.classList.remove('d-none')
     this.imageElement.classList.add('d-none')
     this.imageElement.src = src
+    if (this.modalElement) {
+      const img = this.modalElement.querySelector('img')
+      img.src = src
+    }
   }
 
   async updateImageSrcAsync(promise) {
@@ -34,6 +40,10 @@ class ImageController {
       this.loadingElement.classList.add('d-none')
       this.imageElement.classList.add('d-none')
       this.imageElement.src = ''
+      if (this.modalElement) {
+        const img = this.modalElement.querySelector('img')
+        img.src = ''
+      }
     }
   }
 
@@ -49,10 +59,6 @@ class ImageController {
       this.loadingElement.classList.add('d-none')
       this.imageElement.classList.add('d-none')
     })
-
-    if (this.enableZoom) {
-      this.imageElement.classList.add('zoom-hover')
-    }
   }
 }
 
