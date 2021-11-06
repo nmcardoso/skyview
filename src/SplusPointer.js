@@ -1,3 +1,4 @@
+import './SplusPointer.css'
 import AladinSingleton from './AladinSingleton'
 import createElementFromHTML from './utils'
 import SideNav from './SideNav'

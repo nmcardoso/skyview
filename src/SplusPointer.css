@@ -1,0 +1,26 @@
+.splusPointerControl-container {
+  position: absolute;
+  top: 106px;
+  left: 4px;
+  cursor: pointer;
+  z-index: 20;
+  background: rgba(250,250,250,0.8);
+  border-radius: 4px;
+}
+
+.splusPointerControl-container:hover {
+  background: rgba(220,220,220,0.8);
+}
+
+.splusPointerControl {
+  width: 32px;
+  height: 34px;
+  background-image: url('../assets/pointer.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.splusPointer-cursor {
+  cursor: auto;
+  cursor: url('../assets/pointer_blue.png') 15 15, auto !important;
+}

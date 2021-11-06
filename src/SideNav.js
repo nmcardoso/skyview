@@ -1,3 +1,4 @@
+import './SideNav.css'
 import ImageContainer from './ImageContainer'
 
 class SideNav {
