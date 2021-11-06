@@ -11,7 +11,7 @@ class AladinSingleton {
   _setup() {
     const hipsUrl = 'https://splus.cloud/HIPS/dr2/color'
     this.A = A.aladin('#aladin-lite-div', {
-      target: '20.3190400 -0.5442790',
+      target: '11.4498 -0.8528',
       fov: 0.14,
       cooFrame: 'ICRSd',
       fullScreen: true,
