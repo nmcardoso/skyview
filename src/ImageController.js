@@ -12,42 +12,55 @@ class ImageController {
   }
 
   updateImageSrc(src) {
-    this.errorElement.classList.add('d-none')
-    this.loadingElement.classList.remove('d-none')
-    this.imageElement.classList.add('d-none')
+    this._togglePanel('loading')
     this.imageElement.src = src
   }
 
   async updateImageSrcAsync(promise) {
-    // Loading placeholder
-    this.errorElement.classList.add('d-none')
-    this.loadingElement.classList.remove('d-none')
-    this.imageElement.classList.add('d-none')
+    this._togglePanel('loading')
 
     try {
       const url = await promise()
       this.updateImageSrc(url)
     } catch {
-      // Error placeholder
-      this.errorElement.classList.remove('d-none')
-      this.loadingElement.classList.add('d-none')
-      this.imageElement.classList.add('d-none')
+      this._togglePanel('error')
       this.imageElement.src = ''
     }
   }
 
   _setupListeners() {
     this.imageElement.addEventListener('load', () => {
-      this.errorElement.classList.add('d-none')
-      this.loadingElement.classList.add('d-none')
-      this.imageElement.classList.remove('d-none')
+      this._togglePanel('image')
     })
 
     this.imageElement.addEventListener('error', () => {
-      this.errorElement.classList.remove('d-none')
-      this.loadingElement.classList.add('d-none')
-      this.imageElement.classList.add('d-none')
+      this._togglePanel('error')
     })
+  }
+
+  _togglePanel(show) {
+    switch (show) {
+      case 'error':
+        this.errorElement.classList.remove('d-none')
+        this.loadingElement.classList.add('d-none')
+        this.imageElement.classList.add('d-none')
+        break
+      case 'loading':
+        this.errorElement.classList.add('d-none')
+        this.loadingElement.classList.remove('d-none')
+        this.imageElement.classList.add('d-none')
+        break
+      case 'image':
+        this.errorElement.classList.add('d-none')
+        this.loadingElement.classList.add('d-none')
+        this.imageElement.classList.remove('d-none')
+        break
+      default:
+        this.errorElement.classList.add('d-none')
+        this.loadingElement.classList.add('d-none')
+        this.imageElement.classList.add('d-none')
+        break
+    }
   }
 }
 
