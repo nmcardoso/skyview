@@ -6,7 +6,7 @@ class SideNav {
   }
 
   openNav() {
-    document.getElementById('object-details').style.width = '350px'
+    document.getElementById('object-details').style.width = '400px'
   }
 
   closeNav() {
