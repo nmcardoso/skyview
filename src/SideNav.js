@@ -1,3 +1,5 @@
+import ImageContainer from './ImageContainer'
+
 class SideNav {
   constructor() {
     this.ra = null
@@ -23,26 +25,23 @@ class SideNav {
     document.getElementById('object-details-close').addEventListener('click', () => {
       this.closeNav()
     }, false)
-  }
 
-  _clean() {
-    document.getElementById('splus-spectra').src = ``
-    document.getElementById('splus-trilogy').src = ``
+    this.spectraImg = new ImageContainer({
+      parentElement: document.getElementById('splus-spectra'),
+      width: '350px',
+      height: '279px'
+    })
+
+    this.trilogyImg = new ImageContainer({
+      parentElement: document.getElementById('splus-trilogy'),
+      width: '350px',
+      height: '350px'
+    })
   }
 
   _render() {
-    var spectra = document.getElementById('splus-spectra')
-    spectra.src = `https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&all`
-
-    spectra.onerror = function(e) {
-        //Remember to handle this
-        alert('s-spectra not available')
-    };
-
-    var image = document.getElementById('splus-trilogy')
-    image.src = `https://checker-melted-forsythia.glitch.me/img?ra=${this.ra}&dec=${this.dec}`
-
-    var image = $("<img src='http://no-image.com/' />");
+    this.spectraImg.updateImageSrc(`https://splus-spectra.herokuapp.com/plot?ra=${this.ra}&dec=${this.dec}&all`)
+    this.trilogyImg.updateImageSrc(`https://checker-melted-forsythia.glitch.me/img?ra=${this.ra}&dec=${this.dec}`)
   }
 }
 
