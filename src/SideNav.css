@@ -16,7 +16,6 @@
   font-size: 25px;
   color: #080808;
   display: block;
-  /* transition: 0.3s; */
 }
 
 .sidenav a:hover {
@@ -31,11 +30,17 @@
 .sidenav .closebtn {
   padding: 0px;
   line-height: 36px;
-  /* position: absolute;
-  top: 0;
-  right: 25px; */
   font-size: 36px;
-  /* margin-left: 50px; */
+}
+
+/* Section Title */
+.sidenav .section-title {
+  background-color: #3a3a3a;
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin: 20px 0px 6px 0px;
+  font-size: 12px;
+  color:rgb(245, 245, 245);
 }
 
 @media screen and (max-height: 450px) {

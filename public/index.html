@@ -34,15 +34,103 @@
   <div id="aladin-lite-div" style="border: none;"></div>
 
   <div id="object-details" class="sidenav">
-    <div class="d-flex justify-content-between align-items-center header">
-      <span class="d-block">Object Info</span>
-      <a href="javascript:void(0)" class="closebtn d-block" id="object-details-close">&times;</a>
-    </div>
+    <div class="m-2">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center header">
+        <span class="d-block">Object Info</span>
+        <a href="javascript:void(0)" class="closebtn d-block" id="object-details-close">&times;</a>
+      </div>
 
-    <center>
-      <div id="splus-spectra"></div>
-      <div id="splus-trilogy"></div>
-    </center>
+      <!-- Selector -->
+      <div class="mb-3 row">
+        <label for="staticEmail" class="col-sm-3 col-form-label">Category</label>
+        <div class="col-sm-9">
+          <select id="nav-tab-selector" class="form-select" aria-label="Category">
+            <option value="0" selected>Spectra</option>
+            <option value="1">RGB Images</option>
+            <option value="2">Catalog</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div id="nav-tab-content" class="tabs">
+        <!-- Tab: Spectra -->
+        <div>
+          <!-- Image: S-PLUS PhotoSpectra -->
+          <div id="splus-spectra">
+            <div class="section-title">
+              S-PLUS PhotoSpectra
+            </div>
+            <div data-loading class="image-placeholder">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div data-error class="image-placeholder">
+              <span>Resource Unavailable</span>
+            </div>
+            <img src="" width="100%" />
+          </div>
+
+          <!-- Image: SDSS Spectra -->
+          <div id="sdss-spectra">
+            <div class="section-title">
+              SDSS Spectra
+            </div>
+            <div data-loading class="image-placeholder">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div data-error class="image-placeholder">
+              <span>Resource Unavailable</span>
+            </div>
+            <img src="" width="100%" />
+          </div>
+        </div>
+
+        <!-- Tab: RGB Images -->
+        <div>
+          <!-- Image: S-PLUS RGB -->
+          <div class="section-title">
+            S-PLUS 12 bands RGB
+          </div>
+          <div id="splus-rgb">
+            <div data-loading class="image-placeholder">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div data-error class="image-placeholder">
+              <span>Resource Unavailable</span>
+            </div>
+            <img src="" width="100%" />
+          </div>
+
+          <!-- Image: Legacy RGB -->
+          <div class="section-title">
+            Legacy Survey RGB
+          </div>
+          <div id="legacy-rgb">
+            <div data-loading class="image-placeholder">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div data-error class="image-placeholder">
+              <span>Resource Unavailable</span>
+            </div>
+            <img src="" width="100%" />
+          </div>
+        </div>
+
+        <!-- Tab: Catalog -->
+        <div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </body>
