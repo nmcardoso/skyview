@@ -21,8 +21,8 @@ class ImageController {
   async updateImageSrcAsync(promise) {
     // Loading placeholder
     this.errorElement.classList.add('d-none')
-    this.loadingElement.classList.add('d-none')
-    this.imageElement.classList.remove('d-none')
+    this.loadingElement.classList.remove('d-none')
+    this.imageElement.classList.add('d-none')
 
     try {
       const url = await promise()
