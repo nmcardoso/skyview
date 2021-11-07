@@ -1,17 +1,10 @@
-import './style.css'
-import AladinSingleton from './AladinSingleton'
-import SplusPointer from './SplusPointer'
-import SideNav from './SideNav'
-import LightboxController from './LightboxController'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const aladin = new AladinSingleton()
-  aladin.init()
+import App from './App'
 
-  const sideNav = new SideNav()
-
-  const sp = new SplusPointer({ sideNav })
-  sp.setup()
-
-  new LightboxController()
-})
+ReactDOM.render(
+  <React.StrictMode>
+      <App />
+  </React.StrictMode>,
+  document.getElementById('root')
