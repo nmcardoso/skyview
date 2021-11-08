@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import AladinSingleton from "../core/AladinSingleton"
+import PointerWidget from "./PointerWidget"
 import { ACTIONS, useApp } from "../core/AppContext"
 function Aladin() {
   const [appState, appDispatch] = useApp()
@@ -32,6 +33,7 @@ function Aladin() {
       style={{ border: 'none' }}
       onClick={handleMapClick}
       ref={mapRef}>
+      <PointerWidget />
     </div>
   )
 }
