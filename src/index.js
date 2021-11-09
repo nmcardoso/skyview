@@ -6,6 +6,7 @@ import LightboxController from './LightboxController'
 
 document.addEventListener('DOMContentLoaded', () => {
   const aladin = new AladinSingleton()
+  aladin.init()
 
   const sideNav = new SideNav()
 

@@ -3,12 +3,10 @@ class AladinSingleton {
     if (AladinSingleton._instance) {
       return AladinSingleton._instance
     }
-    AladinSingleton._instance = this;
-
-    this._setup()
+    AladinSingleton._instance = this
   }
 
-  _setup() {
+  init() {
     const hipsUrl = 'https://splus.cloud/HIPS/dr2/color'
     this.A = A.aladin('#aladin-lite-div', {
       target: '11.4498 -0.8528',
