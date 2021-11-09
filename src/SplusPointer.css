@@ -24,3 +24,37 @@
   cursor: auto;
   cursor: url('../assets/pointer_blue.png') 15 15, auto !important;
 }
+
+
+.sliderContainer{
+  position: absolute;
+  top: 150px;
+  left: 4px;
+  z-index: 20;
+  width: 32px;
+}
+
+#slider
+{
+  position: relative;
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+  width: 32px;
+  height: 120px;
+  margin: auto;
+  cursor: pointer;
+}
+
+#slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+#rangerValue{
+  width: 32px;
+  color: white;
+  margin: auto;
+  text-align: center;
+}
