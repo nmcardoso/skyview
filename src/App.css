@@ -16,3 +16,12 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.closebtn {
+  background: none;
+	color: inherit;
+	border: none;
+	cursor: pointer;
+	outline: inherit;
+}
+
