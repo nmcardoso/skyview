@@ -1,3 +1,8 @@
+function createFilter(filters) {
+  const str = Object.entries(filters).map(([k, v]) => `${k}(${v})`).join(' ')
+  return str
+}
+
 function FilterControl({ label, min, max, value, step, onChange }) {
   return (
     <div className="row mb-1">
