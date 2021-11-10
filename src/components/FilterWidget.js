@@ -38,6 +38,7 @@ const filterDefaults = {
   saturate: 0.93,
   'hue-rotate': 0,
   invert: 0,
+  grayscale: 0
 }
 
 
@@ -118,6 +119,14 @@ function FilterWidget() {
             step={0.01}
             value={filterValues.invert}
             onChange={handleChangeFactory('invert')} />
+
+          <FilterControl
+            label="Gray"
+            min={0}
+            max={1}
+            step={0.01}
+            value={filterValues.grayscale}
+            onChange={handleChangeFactory('grayscale')} />
 
         </div>
       </WidgetPopup>
