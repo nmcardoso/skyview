@@ -1,3 +1,10 @@
+import './FilterWidget.css'
+
+import { BsSliders } from 'react-icons/bs'
+import WidgetPopup from './WidgetPopup'
+import { useState, useEffect } from 'react'
+import AladinSingleton from '../core/AladinSingleton'
+
 function createFilter(filters) {
   const str = Object.entries(filters).map(([k, v]) => `${k}(${v})`).join(' ')
   return str
@@ -24,3 +31,51 @@ function FilterControl({ label, min, max, value, step, onChange }) {
     </div>
   )
 }
+
+const filterDefaults = {
+  brightness: 14.5,
+}
+
+
+function FilterWidget() {
+  const [showPopup, setShowPopup] = useState(false)
+  const [filterValues, setFilterValues] = useState(filterDefaults)
+
+  const handlePopupToggle = (e) => {
+    setShowPopup(!showPopup)
+  }
+
+  useEffect(() => {
+    const aladin = new AladinSingleton()
+    if (aladin.mapRef && aladin.mapRef.current) {
+      aladin.mapRef.current.querySelector('.aladin-imageCanvas').style.filter = createFilter(filterValues)
+    }
+  })
+
+  return (
+    <>
+      <div className="filter-widget-container" onClick={handlePopupToggle}>
+        <div className="filter-widget">
+          <BsSliders style={{ width: '100%', height: '100%', padding: '4px' }} />
+        </div>
+      </div>
+
+      <WidgetPopup
+        show={showPopup}
+        style={{ top: '144px' }}
+        onClose={handlePopupToggle}>
+        <div className="pe-2 pt-1">
+          <FilterControl
+            label="Brightness"
+            min={0}
+            max={40}
+            step={0.01}
+            value={filterValues.brightness}
+            onChange={handleChangeFactory('brightness')} />
+        </div>
+      </WidgetPopup>
+    </>
+  )
+}
+
+export default FilterWidget
