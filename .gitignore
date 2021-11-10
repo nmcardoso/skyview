@@ -3,6 +3,7 @@ node_modules
 
 # Webpack
 dist
+build
 
 # MAC
 .DS_Store
