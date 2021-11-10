@@ -36,6 +36,7 @@ const filterDefaults = {
   brightness: 14.5,
   contrast: 1.17,
   saturate: 0.93,
+  'hue-rotate': 0,
 }
 
 
@@ -101,6 +102,13 @@ function FilterWidget() {
             step={0.01}
             value={filterValues.saturate}
             onChange={handleChangeFactory('saturate')} />
+
+          {/* <FilterControl
+            label="Hue"
+            min={0}
+            max={30}
+            value={filterValues['hue-rotate']}
+            onChange={handleChangeFactory('hue-rotate')} /> */}
 
         </div>
       </WidgetPopup>
