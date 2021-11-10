@@ -128,6 +128,7 @@ function FilterWidget() {
             value={filterValues.grayscale}
             onChange={handleChangeFactory('grayscale')} />
 
+          <a href="javascript:void(0)" onClick={handleResetDefault}>Reset default</a>
         </div>
       </WidgetPopup>
     </>
