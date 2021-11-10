@@ -35,6 +35,7 @@ function FilterControl({ label, min, max, value, step, onChange }) {
 const filterDefaults = {
   brightness: 14.5,
   contrast: 1.17,
+  saturate: 0.93,
 }
 
 
@@ -92,6 +93,14 @@ function FilterWidget() {
             step={0.01}
             value={filterValues.contrast}
             onChange={handleChangeFactory('contrast')} />
+
+          <FilterControl
+            label="Saturate"
+            min={0}
+            max={10}
+            step={0.01}
+            value={filterValues.saturate}
+            onChange={handleChangeFactory('saturate')} />
 
         </div>
       </WidgetPopup>
