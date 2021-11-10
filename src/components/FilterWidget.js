@@ -52,6 +52,17 @@ function FilterWidget() {
     }
   })
 
+  const handleChangeFactory = (filter) => {
+    return (e) => {
+      filterValues[filter] = e.target.value
+      setFilterValues({ ...filterValues })
+    }
+  }
+
+  const handleResetDefault = () => {
+    setFilterValues(filterDefaults)
+  }
+
   return (
     <>
       <div className="filter-widget-container" onClick={handlePopupToggle}>
