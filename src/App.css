@@ -25,3 +25,6 @@ body {
 	outline: inherit;
 }
 
+.aladin-imageCanvas {
+  filter: brightness(14.5) contrast(1.17) saturate(0.93) hue-rotate(0) invert(0) grayscale(0);
+}
