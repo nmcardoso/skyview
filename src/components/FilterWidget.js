@@ -34,6 +34,7 @@ function FilterControl({ label, min, max, value, step, onChange }) {
 
 const filterDefaults = {
   brightness: 14.5,
+  contrast: 1.17,
 }
 
 
@@ -83,6 +84,15 @@ function FilterWidget() {
             step={0.01}
             value={filterValues.brightness}
             onChange={handleChangeFactory('brightness')} />
+
+          <FilterControl
+            label="Contrast"
+            min={0}
+            max={5}
+            step={0.01}
+            value={filterValues.contrast}
+            onChange={handleChangeFactory('contrast')} />
+
         </div>
       </WidgetPopup>
     </>
