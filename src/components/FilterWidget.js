@@ -37,6 +37,7 @@ const filterDefaults = {
   contrast: 1.17,
   saturate: 0.93,
   'hue-rotate': 0,
+  invert: 0,
 }
 
 
@@ -109,6 +110,14 @@ function FilterWidget() {
             max={30}
             value={filterValues['hue-rotate']}
             onChange={handleChangeFactory('hue-rotate')} /> */}
+
+          <FilterControl
+            label="Invert"
+            min={0}
+            max={1}
+            step={0.01}
+            value={filterValues.invert}
+            onChange={handleChangeFactory('invert')} />
 
         </div>
       </WidgetPopup>
