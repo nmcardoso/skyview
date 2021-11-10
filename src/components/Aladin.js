@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react"
 import AladinSingleton from "../core/AladinSingleton"
 import PointerWidget from "./PointerWidget"
 import { ACTIONS, useApp } from "../core/AppContext"
+import FilterWidget from "./FilterWidget"
+
 function Aladin() {
   const [appState, appDispatch] = useApp()
   const mapRef = useRef(null)
@@ -34,6 +36,7 @@ function Aladin() {
       onClick={handleMapClick}
       ref={mapRef}>
       <PointerWidget />
+      <FilterWidget />
     </div>
   )
 }
