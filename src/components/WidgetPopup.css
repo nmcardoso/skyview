@@ -1,0 +1,28 @@
+.widget-popup {
+  padding: 4px;
+  z-index: 30;
+  position: absolute;
+  background: #eee;
+  left: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Verdana, Lucida, Arial;
+  line-height: 1.3;
+  color: #222;
+}
+
+.widget-popup .closebtn {
+  float: right;
+  margin-top: 0 0 2px 0;
+  cursor: pointer;
+  color: #605F61;
+  border: 1px solid #AEAEAE;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  display: block;
+  line-height: 0px;
+  padding: 8px 2px;
+}
+

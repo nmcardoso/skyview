@@ -4,6 +4,7 @@ class SloanService {
   }
 
   async getSpecId({ ra, dec }) {
+    console.log('SloanService', ra, dec)
     const r = await fetch(`${this.coneSpectroUrl}?radius=0.01667&dec=${dec}&ra=${ra}&limit=1&format=xml&specparams=specObjID&imgparams=none&zWarning=on`)
     const txt = await r.text()
     const xml = (new DOMParser()).parseFromString(txt, 'application/xml')

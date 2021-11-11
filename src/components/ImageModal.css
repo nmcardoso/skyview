@@ -1,4 +1,4 @@
-.lightbox {
+.image-modal {
   display: none;
   position: fixed;
   z-index: 200;
@@ -15,14 +15,14 @@
 
 /* TODO: https://stackoverflow.com/questions/15907079/css3-transition-fade-out-effect */
 
-.lightbox .content {
+.image-modal .content {
   margin: auto;
   display: block;
   width: 80%;
   max-width: 700px;
 }
 
-.lightbox .footer {
+.image-modal .footer {
   margin: auto;
   display: block;
   width: 100%;
@@ -32,7 +32,7 @@
   padding: 10px 0;
 }
 
-.lightbox a.close {
+.image-modal .closebtn {
   display: flex;
   justify-content:end;
   align-items: center;
@@ -40,19 +40,19 @@
   color: #f1f1f1;
   font-size: 16px;
   font-weight: bold;
+  line-height: 1;
 }
 
-.lightbox a.close:hover {
+.image-modal .closebtn:hover {
   color: #a8a8a8;
 }
 
-.lightbox .close-icon {
+.image-modal .close-icon {
   font-size: 30px;
   line-height: 1px;
   font-weight: bold;
   display: inline-block;
   margin-left: 6px;
-  margin-top: -5px
 }
 
 @keyframes fadeIn {
@@ -66,7 +66,7 @@
 
 
 @media only screen and (max-width: 700px){
-  .lightbox-content {
+  .image-modal-content {
     width: 100%;
   }
 }
