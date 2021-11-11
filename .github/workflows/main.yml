@@ -17,7 +17,7 @@ jobs:
     - name: 'Build Project'
       run: |
         npm install
-        CI=false PUBLIC_URL=https://nmcardoso.github.io/skyview/ npm run build
+        CI=false npm run staging
 
     - name: 'Deploy to GH Pages'
       run: |
