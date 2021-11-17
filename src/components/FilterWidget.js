@@ -5,12 +5,11 @@ import WidgetPopup from './WidgetPopup'
 import { useState, useEffect } from 'react'
 import AladinSingleton from '../core/AladinSingleton'
 
-function createFilter(filters) {
-  const str = Object.entries(filters).map(([k, v]) => `${k}(${v})`).join(' ')
-  return str
+function createFilter(filters, parsers) {
+  return Object.entries(filters).map(([k, v]) => `${k}(${parsers[k](v)})`).join(' ')
 }
 
-function FilterControl({ label, min, max, value, step, onChange }) {
+function FilterControl({ label, min, max, value, step, onChange, parser }) {
   return (
     <div className="row mb-1">
       <label className="col-3 d-flex align-items-center">
@@ -26,7 +25,7 @@ function FilterControl({ label, min, max, value, step, onChange }) {
           step={step || 1}
           onChange={onChange} />
 
-        <span className="ms-3">{Number(value).toFixed(2)}</span>
+        <span className="ms-2">{parser(value)}</span>
       </div>
     </div>
   )
@@ -41,6 +40,18 @@ const filterDefaults = {
   grayscale: 0
 }
 
+const filterCssParsers = {
+  brightness: (v) => v,
+  contrast: (v) => v,
+  saturate: (v) => v,
+  'hue-rotate': (v) => `${v}deg`,
+  invert: (v) => v,
+  grayscale: (v) => v
+}
+
+const degreeParser = (v) => `${Number(v).toFixed(0)}\u00b0`
+const numberParser = (v) => Number(v).toFixed(2)
+
 
 function FilterWidget() {
   const [showPopup, setShowPopup] = useState(false)
@@ -53,7 +64,8 @@ function FilterWidget() {
   useEffect(() => {
     const aladin = new AladinSingleton()
     if (aladin.mapRef && aladin.mapRef.current) {
-      aladin.mapRef.current.querySelector('.aladin-imageCanvas').style.filter = createFilter(filterValues)
+      aladin.mapRef.current.querySelector('.aladin-imageCanvas').style.filter =
+        createFilter(filterValues, filterCssParsers)
     }
   })
 
@@ -80,12 +92,13 @@ function FilterWidget() {
         show={showPopup}
         style={{ top: '144px' }}
         onClose={handlePopupToggle}>
-        <div className="pe-2 pt-1">
+        <div className="px-1 pt-1">
           <FilterControl
             label="Brightness"
             min={0}
             max={40}
             step={0.01}
+            parser={numberParser}
             value={filterValues.brightness}
             onChange={handleChangeFactory('brightness')} />
 
@@ -94,6 +107,7 @@ function FilterWidget() {
             min={0}
             max={5}
             step={0.01}
+            parser={numberParser}
             value={filterValues.contrast}
             onChange={handleChangeFactory('contrast')} />
 
@@ -102,21 +116,25 @@ function FilterWidget() {
             min={0}
             max={10}
             step={0.01}
+            parser={numberParser}
             value={filterValues.saturate}
             onChange={handleChangeFactory('saturate')} />
 
-          {/* <FilterControl
+          <FilterControl
             label="Hue"
             min={0}
-            max={30}
+            max={360}
+            step={1}
+            parser={degreeParser}
             value={filterValues['hue-rotate']}
-            onChange={handleChangeFactory('hue-rotate')} /> */}
+            onChange={handleChangeFactory('hue-rotate')} />
 
           <FilterControl
             label="Invert"
             min={0}
             max={1}
             step={0.01}
+            parser={numberParser}
             value={filterValues.invert}
             onChange={handleChangeFactory('invert')} />
 
@@ -125,6 +143,7 @@ function FilterWidget() {
             min={0}
             max={1}
             step={0.01}
+            parser={numberParser}
             value={filterValues.grayscale}
             onChange={handleChangeFactory('grayscale')} />
 
