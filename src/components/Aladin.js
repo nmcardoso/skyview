@@ -3,6 +3,7 @@ import AladinSingleton from "../core/AladinSingleton"
 import PointerWidget from "./PointerWidget"
 import { ACTIONS, useApp } from "../core/AppContext"
 import FilterWidget from "./FilterWidget"
+import CompactToastWidget from "./CompactToastWidget"
 
 function Aladin() {
   const [appState, appDispatch] = useApp()
@@ -37,6 +38,7 @@ function Aladin() {
       ref={mapRef}>
       <PointerWidget />
       <FilterWidget />
+      <CompactToastWidget />
     </div>
   )
 }
