@@ -3,16 +3,29 @@ import AladinSingleton from "../core/AladinSingleton"
 import PointerWidget from "./PointerWidget"
 import { ACTIONS, useApp } from "../core/AppContext"
 import FilterWidget from "./FilterWidget"
+import { useSearchParams } from "react-router-dom"
+import ShareWidget from "./ShareWidget"
 import CompactToastWidget from "./CompactToastWidget"
+
+// AladinLite API URL: https://aladin.u-strasbg.fr/AladinLite/doc/API/
 
 function Aladin() {
   const [appState, appDispatch] = useApp()
   const mapRef = useRef(null)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     const aladin = new AladinSingleton()
     aladin.init()
     aladin.setMapRef(mapRef)
+
+    if (searchParams.has('target')) {
+      aladin.A.gotoObject(searchParams.get('target'), console.log)
+    }
+
+    if (searchParams.has('fov')) {
+      aladin.A.setFov(searchParams.get('fov'), console.log)
+    }
   }, [])
 
   const handleMapClick = (e) => {
@@ -38,6 +51,7 @@ function Aladin() {
       ref={mapRef}>
       <PointerWidget />
       <FilterWidget />
+      <ShareWidget />
       <CompactToastWidget />
     </div>
   )
