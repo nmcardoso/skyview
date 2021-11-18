@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "https://nmcardoso.github.io/skyview/static/css/main.09bafeb7.chunk.css",
+    "main.js": "https://nmcardoso.github.io/skyview/static/js/main.c1b0dab0.chunk.js",
+    "main.js.map": "https://nmcardoso.github.io/skyview/static/js/main.c1b0dab0.chunk.js.map",
+    "runtime-main.js": "https://nmcardoso.github.io/skyview/static/js/runtime-main.02488d98.js",
+    "runtime-main.js.map": "https://nmcardoso.github.io/skyview/static/js/runtime-main.02488d98.js.map",
+    "static/js/2.1515634f.chunk.js": "https://nmcardoso.github.io/skyview/static/js/2.1515634f.chunk.js",
+    "static/js/2.1515634f.chunk.js.map": "https://nmcardoso.github.io/skyview/static/js/2.1515634f.chunk.js.map",
+    "index.html": "https://nmcardoso.github.io/skyview/index.html",
+    "static/css/main.09bafeb7.chunk.css.map": "https://nmcardoso.github.io/skyview/static/css/main.09bafeb7.chunk.css.map",
+    "static/js/2.1515634f.chunk.js.LICENSE.txt": "https://nmcardoso.github.io/skyview/static/js/2.1515634f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.02488d98.js",
+    "static/js/2.1515634f.chunk.js",
+    "static/css/main.09bafeb7.chunk.css",
+    "static/js/main.c1b0dab0.chunk.js"
+  ]
+}
